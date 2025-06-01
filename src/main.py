@@ -8,6 +8,8 @@ from src.api.categories.models import Category
 from src.api.groups.models import Group
 from src.api.products.models import Product as ProductModel
 from src.api.stock_movements.models import StockMovement
+# Rutas
+from src.api.categories.routes import router as category_router
 
 app = FastAPI(title="Kartax API")
 
@@ -22,3 +24,5 @@ async def root():
 def read_db_version(db: Session = Depends(get_db)):
     result = db.execute(text("SELECT version()")).scalar()
     return {"postgres_version": result}
+
+app.include_router(category_router)
