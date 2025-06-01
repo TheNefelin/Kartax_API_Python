@@ -1,0 +1,22 @@
+Kartax API License (Custom Non-Commercial License)
+
+Copyright (c) 2025 Water
+
+Permission is hereby granted to any person obtaining a copy of this software
+and associated documentation files (the "Software"), to use, modify, and
+distribute the Software for personal, educational, and non-commercial purposes,
+subject to the following conditions:
+
+1. Commercial use of this Software or any derivative works is strictly
+   prohibited without explicit, written permission from the copyright holder.
+
+2. Redistribution of modified versions must retain this license and include
+   attribution to the original author.
+
+3. The Software is provided "as is", without warranty of any kind, express or
+   implied, including but not limited to the warranties of merchantability,
+   fitness for a particular purpose and noninfringement.
+
+By using this Software, you agree to the terms of this license.
+
+For commercial licensing inquiries, contact: [tu_email@ejemplo.com]

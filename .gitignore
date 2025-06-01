@@ -1,0 +1,39 @@
+# Bytecode y cachés de Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Entorno virtual
+venv/
+ENV/
+env/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de configuración del editor
+.vscode/
+.idea/
+*.swp
+
+# Archivos de entorno y variables sensibles
+.env
+#.env.*
+
+# Base de datos local o backups
+*.db
+*.sqlite3
+#*.sql
+*.bak
+
+# Archivos de log
+*.log
+
+# Compilaciones
+*.egg-info/
+dist/
+build/
+
+# Dependencias si generas archivos adicionales
+pip-wheel-metadata/
