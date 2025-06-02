@@ -1,39 +1,76 @@
 from sqlalchemy.orm import Session
+from sqlalchemy.exc import SQLAlchemyError
+from src.shared.responses import ResponseModel
 from . import models, schemas
 
-def create_category(db: Session, category: schemas.CategoryCreate):
-    db_category = models.Category(
-        name=category.name,
-        img=category.img
-    )
-    db.add(db_category)
-    db.commit()
-    db.refresh(db_category)
-    return db_category
-
 def get_categories(db: Session):
-    return db.query(models.Category).all()
+    db_categories = db.query(models.Category).all()
+    return ResponseModel.Success(data=db_categories)
 
-def get_category(db: Session, category_id: int):
-    return db.query(models.Category).filter(models.Category.id == category_id).first()
+def get_category(db: Session, id: int):
+    db_category = db.query(models.Category).filter(models.Category.id == id).first()
+    if not db_category:
+        return ResponseModel.NotFound()
+    category_out = schemas.CategoryOut.model_validate(db_category)
+    return ResponseModel.Success(data=category_out)
 
-def update_category(db: Session, category_id: int, category_data: schemas.CategoryCreate):
-    category = db.query(models.Category).filter(models.Category.id == category_id).first()
-    if not category:
-        return None
+def create_category(db: Session, category: schemas.CategoryCreate):
+    try:
+        db_category = models.Category(
+            name=category.name,
+            img=category.img
+        )
+        db.add(db_category)
+        db.commit()
+        db.refresh(db_category)
+        category_out = schemas.CategoryOut.model_validate(db_category)
+        return ResponseModel.Created(data=category_out)
+    except SQLAlchemyError as e:
+        db.rollback()
+        return ResponseModel.ServerError(message=str(e))
+    
+def update_category(db: Session, id: int, category: schemas.CategoryUpdate):
+    try:
+        db_category = db.query(models.Category).filter(models.Category.id == id).first()
+        if not db_category:
+            return ResponseModel.NotFound()
+        db_category.name = category.name
+        db_category.img = category.img
+        db.commit()
+        db.refresh(db_category)
+        category_out = schemas.CategoryOut.model_validate(db_category)
+        return ResponseModel.Success(data=category_out)
+    except SQLAlchemyError as e:
+        db.rollback()
+        return ResponseModel.ServerError(message=str(e))
 
-    category.name = category_data.name
-    category.img = category_data.img
-    db.commit()
-    db.refresh(category)
-    return category
-
-def delete_category(db: Session, category_id: int):
-    category = db.query(models.Category).filter(models.Category.id == category_id).first()
-    if not category:
-        return None
-
-    db.delete(category)
-    db.commit()
-    return category
-
+def patch_category(db: Session, id: int, category: schemas.CategoryPatch):
+    try:
+        db_category = db.query(models.Category).filter(models.Category.id == id).first()
+        if not db_category:
+            return ResponseModel.NotFound()
+        if category.name is None and category.img is None:
+            return ResponseModel.BadRequest(message="At least one field (name or img) must be provided.")
+        if category.name is not None:
+            db_category.name = category.name
+        if category.img is not None:
+            db_category.img = category.img
+        db.commit()
+        db.refresh(db_category)
+        category_out = schemas.CategoryOut.model_validate(db_category)
+        return ResponseModel.Success(data=category_out)
+    except SQLAlchemyError as e:
+        db.rollback()
+        return ResponseModel.ServerError(message=str(e))
+    
+def delete_category(db: Session, id: int):
+    try:
+        db_category = db.query(models.Category).filter(models.Category.id == id).first()
+        if not db_category:
+            return ResponseModel.NotFound()
+        db.delete(db_category)
+        db.commit()
+        return ResponseModel.Success(message="Deleted successfully.")
+    except SQLAlchemyError as e:
+        db.rollback()
+        return ResponseModel.ServerError(message=str(e))

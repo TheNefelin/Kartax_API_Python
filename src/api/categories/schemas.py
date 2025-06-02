@@ -1,16 +1,32 @@
 from pydantic import BaseModel
 from datetime import datetime
+from typing import Optional
 
-class CategoryCreate(BaseModel):
+from pydantic import BaseModel
+from datetime import datetime
+from typing import Optional
+
+class CategoryId(BaseModel):
+    id: int
+
+class CategoryBase(BaseModel):
     name: str
     img: str
 
+class CategoryCreate(CategoryBase):
+    pass
 
-class CategoryOut(CategoryCreate):
-    id: int
+class CategoryUpdate(CategoryBase):
+    pass
+
+class CategoryPatch(BaseModel):
+    name: Optional[str] = None
+    img: Optional[str] = None
+
+class CategoryOut(CategoryBase, CategoryId):
     is_enable: bool
     created_at: datetime
     updated_at: datetime
 
     class Config:
-        from_attributes = True  # Esto reemplaza a 'orm_mode = True' en Pydantic v2
+        from_attributes = True  # Necesario para leer desde SQLAlchemy
