@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Depends
+from fastapi.staticfiles import StaticFiles
 from sqlalchemy import text
 from sqlalchemy.orm import Session
 # Importamos lo necesario para la base:
@@ -11,7 +12,7 @@ from src.api.stock_movements.models import StockMovement
 # Rutas
 from src.api.categories.routes import router as category_router
 
-app = FastAPI(title="Kartax API")
+app = FastAPI(title="Kartax API", description="In development", version="1.0")
 
 # Creamos las tablas (si no existen) al arrancar la app
 Base.metadata.create_all(bind=engine)
@@ -26,3 +27,4 @@ def read_db_version(db: Session = Depends(get_db)):
     return {"postgres_version": result}
 
 app.include_router(category_router)
+app.mount("/static", StaticFiles(directory="src/static"), name="static")
