@@ -7,6 +7,7 @@ class Product(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     group_id = Column(Integer, ForeignKey("groups.id"), nullable=False)
+    parent_product_id = Column(Integer, ForeignKey("products.id"), nullable=True)
     name = Column(String(100), nullable=False)
     description = Column(String(256), nullable=False)
     img = Column(String(100), nullable=False)
@@ -14,7 +15,6 @@ class Product(Base):
     base_unit = Column(String(20), nullable=False)
     sale_unit = Column(Numeric, nullable=True)
     stock = Column(Numeric, default=0)
-    parent_product_id = Column(Integer, ForeignKey("products.id"), nullable=True)
     waste_percentage = Column(Numeric(5, 2), default=0)
     created_at = Column(DateTime, server_default=func.now())
     updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())

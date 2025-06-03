@@ -35,6 +35,7 @@ CREATE TABLE groups (
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
     group_id INTEGER NOT NULL REFERENCES groups(id),
+    parent_product_id INTEGER REFERENCES products(id),
     name VARCHAR(100) NOT NULL,
     description VARCHAR(256) NOT NULL,
     img VARCHAR(100) NOT NULL,    
@@ -42,7 +43,6 @@ CREATE TABLE products (
     base_unit VARCHAR(20) NOT NULL,
     sale_unit NUMERIC DEFAULT NULL,
     stock NUMERIC DEFAULT 0,
-    parent_product_id INTEGER REFERENCES products(id),
     waste_percentage NUMERIC(5,2) DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -86,11 +86,11 @@ VALUES
 
 -- Pintas (0.5L), fraccionadas del barril
 INSERT INTO products 
-    (group_id, name, description, img, base_unit, sale_unit, stock, parent_product_id)
+    (group_id, parent_product_id, name, description, img, base_unit, sale_unit, stock)
 VALUES
-    (1, 'Pinta de Pils', 'Pinta de 0.5L de cerveza rubia artesanal', 'pils_pinta.webp', 'litros', 0.5, 0, 1),
-    (1, 'Pinta de Santa Sed', 'Pinta de 0.5L de cerveza ámbar artesanal', 'santa_sed_pinta.webp', 'litros', 0.5, 0, 2),
-    (1, 'Pinta de Blood', 'Pinta de 0.5L de cerveza roja artesanal', 'blood_pinta.webp', 'litros', 0.5, 0, 3);
+    (1, 1, 'Pinta de Pils', 'Pinta de 0.5L de cerveza rubia artesanal', 'pils_pinta.webp', 'litros', 0.5, 0),
+    (1, 2, 'Pinta de Santa Sed', 'Pinta de 0.5L de cerveza ámbar artesanal', 'santa_sed_pinta.webp', 'litros', 0.5, 0),
+    (1, 3, 'Pinta de Blood', 'Pinta de 0.5L de cerveza roja artesanal', 'blood_pinta.webp', 'litros', 0.5, 0);
 
 INSERT INTO products 
     (group_id, name, description, img, base_unit, sale_unit, stock)

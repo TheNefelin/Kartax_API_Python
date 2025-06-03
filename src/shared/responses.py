@@ -17,7 +17,7 @@ class ResponseModel(BaseModel, Generic[T]):
         return cls(
             isSuccess=True,
             statusCode=200,
-            status="success",
+            status="Success",
             message=message,
             data=data,
         )

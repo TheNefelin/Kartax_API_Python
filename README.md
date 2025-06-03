@@ -76,6 +76,10 @@ my_api/
 │   │   ├── config.py        # Environment and settings
 │   │   ├── database.py      # DB connection setup
 │   │   └── security.py      # Security and hashing utils
+│   │
+│   ├── shared/
+│   │   └── responses.py
+│   │
 │   └── main.py              # FastAPI app instance
 │
 ├── tests/
@@ -84,9 +88,13 @@ my_api/
 │   └── test_products.py
 │
 ├── .env                    # Environment variables
+├── .gitignore
+├── LICENSE.txt
+├── postgre.sql
+├── README.md              # Project documentation
 ├── requirements.txt
 ├── run.py                 # App entry point
-└── README.md              # Project documentation
+└── vercel.json
 ```
 
 ---
@@ -119,7 +127,30 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO testing;
 Tests are located in the `tests/` directory and should follow the structure of your API modules. Use `pytest` or `unittest` to execute them.
 
 ```bash
+pip install pytest httpx
+```
+```bash
 pytest
+```
+
+---
+
+## 🔄 Reverse Engineering – Generate `models.py` from Database
+
+To automatically generate SQLAlchemy models from an existing PostgreSQL database, you can use `sqlacodegen`.
+
+### 1. Install `sqlacodegen`
+
+```bash
+pip install sqlacodegen
+```
+
+### 2. Generate models from the database
+
+Make sure your PostgreSQL container is running and accessible, then run:
+
+```bash
+sqlacodegen postgresql://testing:testing@localhost:5432/db_testing > models.py
 ```
 
 ---
