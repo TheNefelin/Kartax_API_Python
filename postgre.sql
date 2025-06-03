@@ -99,31 +99,19 @@ VALUES
     (2, 'Kross', 'Cerveza envasada Kross 330ml', 'kross.webp', 'unidad', 1, 0),
     (2, 'Kunstmann', 'Cerveza envasada Kunstmann 330ml', 'kunstmann.webp', 'unidad', 1, 0),
     (2, 'Budweiser', 'Cerveza envasada Budweiser 330ml', 'budweiser.webp', 'unidad', 1, 0),
-    (2, 'Royal', 'Cerveza envasada Royal 330ml', 'royal.webp', 'unidad', 1, 0);
-
-INSERT INTO products 
-    (group_id, name, description, img, base_unit, sale_unit, stock)
-VALUES
+    (2, 'Royal', 'Cerveza envasada Royal 330ml', 'royal.webp', 'unidad', 1, 0),
     (3, 'Tabla de Carne', 'Tabla con variedad de carnes', 'tabla_carne.webp', 'unidad', 1, 0),
     (3, 'Tabla de Queso', 'Tabla con variedad de quesos', 'tabla_queso.webp', 'unidad', 1, 0),
     (3, 'Tabla Veggie', 'Tabla vegetariana con vegetales y quesos', 'tabla_veggie.webp', 'unidad', 1, 0),
     (3, 'Papas Rústicas', 'Papas fritas rústicas', 'papas_rusticas.webp', 'unidad', 1, 0),
     (3, 'Papas Merken', 'Papas fritas con merken', 'papas_merken.webp', 'unidad', 1, 0),
-    (3, 'Papas Cheddar', 'Papas fritas con queso cheddar', 'papas_cheddar.webp', 'unidad', 1, 0);
-
-INSERT INTO products 
-    (group_id, name, description, img, base_unit, sale_unit, stock)
-VALUES
+    (3, 'Papas Cheddar', 'Papas fritas con queso cheddar', 'papas_cheddar.webp', 'unidad', 1, 0),
     (4, 'Hamburguesa de Res', 'Hamburguesa clásica de carne de res', 'hamburguesa_res.webp', 'unidad', 1, 0),
     (4, 'Hamburguesa Pollo Apanado', 'Hamburguesa de pollo apanado', 'hamburguesa_apanado.webp', 'unidad', 1, 0),
     (4, 'Hamburguesa Doble Cheddar', 'Hamburguesa doble con queso cheddar', 'hamburguesa_cheddar.webp', 'unidad', 1, 0),
     (4, 'Hamburguesa Mechada', 'Hamburguesa con carne mechada', 'hamburguesa_mechada.webp', 'unidad', 1, 0),
     (4, 'Hamburguesa Veggie', 'Hamburguesa vegetariana', 'hamburguesa_veggie.webp', 'unidad', 1, 0),
-    (4, 'Hamburguesa Veggie Legumbres', 'Hamburguesa de legumbres', 'hamburguesa_veggie_legumbres.webp', 'unidad', 1, 0);
-
-INSERT INTO products 
-	(group_id, name, description, img, base_unit, sale_unit, stock)
-VALUES
+    (4, 'Hamburguesa Veggie Legumbres', 'Hamburguesa de legumbres', 'hamburguesa_veggie_legumbres.webp', 'unidad', 1, 0),
     (5, 'Completo Mexicano', 'Completo con ingredientes mexicanos', 'completo_mexicano.webp', 'unidad', 1, 0),
     (5, 'Completo Tocino', 'Completo con tocino crujiente', 'completo_tocino.webp', 'unidad', 1, 0),
     (5, 'Completo Italiano', 'Completo clásico italiano', 'completo_italiano.webp', 'unidad', 1, 0),

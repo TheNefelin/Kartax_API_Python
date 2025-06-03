@@ -1,13 +1,15 @@
 from datetime import datetime, timezone
+from typing import Optional
+import unittest
 from unittest.mock import MagicMock
 from sqlalchemy.exc import SQLAlchemyError
 from src.api.categories import crud, schemas
 
-def mock_category_instance():
+def mock_category_instance(name: str = "Mock Category", img: str = "img.png"):
     mock = MagicMock()
     mock.id = 1
-    mock.name = "Mock Category"
-    mock.img = "img.png"
+    mock.name = name
+    mock.img = img
     mock.is_enable = True
     mock.created_at = datetime.now(timezone.utc)
     mock.updated_at = datetime.now(timezone.utc)
@@ -34,14 +36,21 @@ def test_get_category_not_found():
     result = crud.get_category(mock_db, 999)
     assert result.status == "Not Found"
 
-# def test_create_category_success():
-#     mock_db = MagicMock()
-#     schema = schemas.CategoryCreate(name="New", img="img.png")
-#     result = crud.create_category(mock_db, schema)
-#     assert result.status == "Created"
-#     assert result.data is not None
-#     assert hasattr(result.data, "name")
-#     assert result.data.name == "New"
+def test_create_category_success():
+    mock_db = MagicMock()
+    db_category = mock_category_instance(name="New", img="new.png")  # Usamos el helper
+    mock_db.add.return_value = None
+    mock_db.commit.return_value = None
+    mock_db.refresh.side_effect = lambda obj: None  # Simula refresh como no-op
+    # Parchear el modelo real para que devuelva el mock
+    with unittest.mock.patch("src.api.categories.models.Category", return_value=db_category):
+        schema = schemas.CategoryCreate(name="New", img="new.png")
+        result = crud.create_category(mock_db, schema)
+        assert result.status == "Created"
+        assert result.data is not None
+        assert result.data.name == "New"
+        assert result.data.img == "new.png"
+
 
 def test_create_category_db_error():
     mock_db = MagicMock()
