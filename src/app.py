@@ -11,6 +11,8 @@ from src.api.products.models import Product as ProductModel
 from src.api.stock_movements.models import StockMovement
 # Rutas
 from src.api.categories.routes import router as category_router
+from src.api.groups.routes import router as group_router
+from src.api.products.routes import router as product_router
 
 app = FastAPI(title="Kartax API", description="In development", version="1.0")
 
@@ -27,4 +29,6 @@ def read_db_version(db: Session = Depends(get_db)):
     return {"postgres_version": result}
 
 app.include_router(category_router)
+app.include_router(group_router)
+app.include_router(product_router)
 app.mount("/static", StaticFiles(directory="src/static"), name="static")

@@ -6,7 +6,7 @@ class StockMovement(Base):
     __tablename__ = "stock_movements"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    product_id = Column(Integer, ForeignKey("products.id", ondelete="CASCADE"), nullable=False)
+    product_id = Column(Integer, ForeignKey("products.id"), nullable=False)
     movement_type = Column(String(20), nullable=False)
     quantity = Column(Numeric, nullable=False)
     movement_date = Column(DateTime, server_default=func.now())

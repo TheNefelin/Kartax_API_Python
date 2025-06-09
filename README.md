@@ -61,39 +61,50 @@ my_api/
 ├── src/
 │   ├── api/
 │   │   ├── categories/
-│   │   │   ├── crud.py      # Database operations for categories
-│   │   │   ├── models.py    # SQLAlchemy models
-│   │   │   ├── routes.py    # API routes
-│   │   │   └── schemas.py   # Pydantic schemas
+│   │   │   ├── crud.py     # Database operations for categories
+│   │   │   ├── models.py   # SQLAlchemy models
+│   │   │   ├── routes.py   # API routes
+│   │   │   └── schemas.py  # Pydantic schemas
 │   │   ├── groups/
-│   │   │   └── models.py
+│   │   │   ├── crud.py
+│   │   │   ├── models.py
+│   │   │   ├── routes.py
+│   │   │   └── schemas.py
 │   │   ├── products/
-│   │   │   └── models.py
+│   │   │   ├── crud.py
+│   │   │   ├── models.py
+│   │   │   ├── routes.py
+│   │   │   └── schemas.py
 │   │   └── stock_movements/
-│   │       └── models.py
+│   │       ├── crud.py
+│   │       ├── models.py
+│   │       ├── routes.py
+│   │       └── schemas.py
 │   │
 │   ├── core/
-│   │   ├── config.py        # Environment and settings
-│   │   ├── database.py      # DB connection setup
-│   │   └── security.py      # Security and hashing utils
+│   │   ├── config.py       # Environment and settings
+│   │   ├── database.py     # DB connection setup
+│   │   └── security.py     # Security and hashing utils
 │   │
 │   ├── shared/
 │   │   └── responses.py
 │   │
-│   └── main.py              # FastAPI app instance
+│   └── main.py             # FastAPI app instance
 │
 ├── tests/
 │   ├── __init__.py
-│   ├── test_users.py
-│   └── test_products.py
+│   ├── conftest.py
+│   ├── test_categories_crud.py
+│   └── test_categories_route.py
 │
 ├── .env                    # Environment variables
 ├── .gitignore
 ├── LICENSE.txt
 ├── postgre.sql
-├── README.md              # Project documentation
+├── pytest.ini
+├── README.md               # Project documentation
 ├── requirements.txt
-├── run.py                 # App entry point
+├── run.py                  # App entry point
 └── vercel.json
 ```
 
