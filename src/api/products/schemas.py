@@ -10,6 +10,7 @@ class ProductBase(BaseModel):
     parent_product_id: int
     name: str
     description: str
+    price: int
     img: str
     is_fractional: bool
     base_unit: str
@@ -40,6 +41,7 @@ class ProductOut(BaseModel):
     parent_product_id: Optional[int]
     name: str
     description: str
+    price: int
     img: str
     is_fractional: bool
     base_unit: str

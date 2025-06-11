@@ -8,6 +8,7 @@ class ProductPublicOut(BaseModel):
     parent_product_id: Optional[int]
     name: str
     description: str
+    price: int
     img: str
     is_fractional: bool
     base_unit: str

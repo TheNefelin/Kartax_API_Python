@@ -11,6 +11,7 @@ class Product(Base):
     parent_product_id = Column(Integer, ForeignKey("products.id"), nullable=True)
     name = Column(String(100), nullable=False)
     description = Column(String(256), nullable=False)
+    price = Column(Integer, nullable=False, default=0)
     img = Column(String(100), nullable=False)
     is_fractional = Column(Boolean, default=False, server_default=text('false'), nullable=False)
     base_unit = Column(String(20), nullable=False)
